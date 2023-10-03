@@ -22,6 +22,7 @@ Function Parse-DNSZone() {
         
         If ($Array[0] -match 'ORIGIN') { $Domain = $Array[1]; } ## Record domain name
         If ($Array[0] -eq "IN") { $Array =  @($Records[-1].Name) + $Array } ## If record name blank, then return record name above it
+        If ($Array[1] -notin @("IN","CS","CH","HS")) { $Array = @($Array[0]) + @("IN") + @($Array[1..($Array.Length - 1)]) } ## Add a class if one doesn't exist
 
         ## Removes the following: Records that are only numbers, empty lines.
         [System.Collections.ArrayList]$ArrayList = $Array
