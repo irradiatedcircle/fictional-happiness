@@ -7,6 +7,7 @@
 Function Parse-DNSZone() {
     [CmdletBinding()]
     Param(
+        $Domain,
         $FilePath
     )
 
@@ -20,7 +21,7 @@ Function Parse-DNSZone() {
         $Array = -split $Line -join ' ' -split ' ' ## Remove all of extra blanks space and then split by them
         If ($Line -match "[0-9]+`n") { Continue } ## Remove SOA information
         
-        If ($Array[0] -match 'ORIGIN') { $Domain = $Array[1]; } ## Record domain name
+        If ($Array[0] -match 'ORIGIN' -and !$Domain) { $Domain = $Array[1]; } ## Record domain name
         If ($Array[0] -eq "IN") { $Array =  @($Records[-1].Name) + $Array } ## If record name blank, then return record name above it
         If ($Array[1] -notin @("IN","CS","CH","HS")) { $Array = @($Array[0]) + @("IN") + @($Array[1..($Array.Length - 1)]) } ## Add a class if one doesn't exist
 
