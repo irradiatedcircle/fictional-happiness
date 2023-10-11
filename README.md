@@ -44,3 +44,6 @@ ftp  IN    CNAME {www.example.com.}
 bill IN    A     {192.168.0.3}
 fred IN    A     {192.168.0.4}
 ```
+
+## domain-plz
+A draft variation of the can-i-haz-xyz to look up dangling subdomains. Only currently supports services with CNAMEs.
