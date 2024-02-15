@@ -47,3 +47,25 @@ fred IN    A     {192.168.0.4}
 
 ## domain-plz
 A draft variation of the can-i-haz-xyz to look up dangling subdomains. Only currently supports services with CNAMEs.
+
+## ImposterAI
+A [Google Chrome extension](https://chromewebstore.google.com/detail/imposterai/dglanhchpmkhoiinklkdjlkjkjpopilh) that actively reads and modifies the content of the [CultureAI](https://www.culture.a) platform. In it's current state, the extension adds a 'triage' button for analysts to use to search their own Microsoft Sentinel instance. Example configuration options are as follows:
+
+```
+Subsciption ID                       Resource Group Workspace Name
+--------------                       -------------- --------------
+49170a36-4033-430c-a464-3830749df2ca prod-sentinel  prod-sentinel
+
+Query
+-----
+MessageTrace | where TimeGenerated > ago(7d) | where Subject_s startswith "{0}" | project TimeGenerated, MessageId_s, SenderAddress_s, RecipientAddress_s, Subject_s, Status_s, FromIP_s, Size_d, ToIP_s
+```
+
+### To-do
+- [x] Create extension that monitors table
+- [x] Add button to dynamic rows
+- [x] Implement a pop up to add user's configuration
+- [x] Add Microsoft Sentinel integration
+- [ ] Add URLScan integration
+- [ ] Add VirusTotal integration
+- [ ] Replace CultureAI with ImposterAI logo
